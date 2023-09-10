@@ -39,13 +39,19 @@ export default function MailingInformation() {
   function saveToLocalStorage() {
     const existingUsers = localStorage.getItem("users");
 
-    let addingItems;
+    let addingItems: User[];
+    const { nrcNumber, nrcTypeNumber, ...otherPersonalInformation } = personalInformation;
     if (existingUsers) {
       // Add existing Items into new items
       const parsedUsers: User[] = JSON.parse(existingUsers);
-      addingItems = [...parsedUsers, { ...personalInformation, ...contactInformation, ...mailingInfo, id: parsedUsers.length }]
+
+      addingItems = [
+        ...parsedUsers,
+        {
+          ...otherPersonalInformation, ...contactInformation, ...mailingInfo, id: parsedUsers.length, nrc: nrcTypeNumber + "(C)" + nrcNumber
+        }]
     } else {
-      addingItems = [{ ...personalInformation, ...contactInformation, ...mailingInfo, id: 0 }]
+      addingItems = [{ ...personalInformation, ...contactInformation, ...mailingInfo, id: 0, nrc: nrcTypeNumber + "(C)" + nrcNumber }]
     }
 
     localStorage.setItem("users", JSON.stringify(addingItems));
