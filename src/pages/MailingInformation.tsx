@@ -49,7 +49,7 @@ export default function MailingInformation() {
     }
 
     localStorage.setItem("users", JSON.stringify(addingItems));
-    // navigate("/");
+    navigate("/");
   }
   return (
     <div>
