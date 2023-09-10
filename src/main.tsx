@@ -1,27 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import App from './App';
 import "./index.css";
 import ContactInformation from './pages/ContactInformation';
+import MailingInformation from './pages/MailingInformation';
 import PersonalInformation1 from './pages/PersonalInformation';
-import Root from './pages/root';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <App />,
   },
   {
-    path: "/personal_information",
+    path: "/personal-information",
     element: <PersonalInformation1 />
   }
   , {
-    path: "/contact_information",
+    path: "/contact-information",
     element: <ContactInformation />
   }
   , {
-    path: "/mailing_information",
-    element: <ContactInformation />
+    path: "/mailing-information",
+    element: <MailingInformation />
   }
 ]);
 
