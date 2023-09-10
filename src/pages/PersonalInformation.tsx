@@ -1,44 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { data as geoData } from "../assets/data/geodata.json" assert { type: "json" };
 import { data as nrcData } from "../assets/data/nrc.json" assert { type: "json" };
-
-interface NrcData {
-  id: string,
-  name_en: string
-  name_mm: string,
-  nrc_code: string,
-  created_at: string,
-  updated_at: string
-
-}
-interface GeoData {
-  eng: string
-  lat: string
-  lng: string
-  capital: string
-  mm: string
-  districts: District[]
-}
-interface District {
-  eng: string,
-  mm: string
-  townships: Township[]
-}
-interface Township {
-  eng: string
-  mm: string
-}
-export interface PersonalInformation {
-  title: "Mr" | "Mrs" | "Dr" | string
-  type: "NRC" | "Old NRC" | "Passport" | string
-  fullName: string
-  state: string,
-  township: string
-  dateOfBirth: string
-  nrcNumber: string
-  nrcTypeNumber: string
-}
+import { GeoData } from "../types/geo.type";
+import PersonalInformation from "../types/personal-information.type";
 export default function PersonalInformation1() {
   const [personalInformation, setPersonalInformation] = useState<PersonalInformation>({
     type: "NRC",
@@ -67,6 +32,7 @@ export default function PersonalInformation1() {
     }).flat();
     return filteredTownships;
   }, [personalInformation.state])
+  // Get NRC number and shorthand after selecting township
   const nrcTypeNumber: string | undefined = useMemo(() => {
     const filteredNrcData = nrcData.filter(item => {
       const splittedTownship = item.name_mm.split(" ");
@@ -104,7 +70,6 @@ export default function PersonalInformation1() {
   }
   return (
     <div className="relative w-full h-full max-w-5xl pt-12 mx-auto bg-white">
-      <Link to="/contact-information" state={{ test: "testing" }}>Link Text</Link>
       <div className="">
         <div className="relative flex">
           <div className="flex">
