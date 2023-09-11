@@ -85,16 +85,9 @@ function App() {
 
   const totalPages = useMemo(() => Math.floor(orderedUserData.length / rowsPerPage), [rowsPerPage, orderedUserData])
   const paginatedSortedUserData: User[] = useMemo(() => {
-    const startId = currentPage !== 1 ? rowsPerPage * currentPage : 1;
+    const startId = currentPage !== 1 ? rowsPerPage * currentPage : 0;
     const endId = startId + rowsPerPage;
-
-    let test = orderedUserData.slice(startId, endId);
-    console.log({
-      startId, currentPage, rowsPerPage
-    });
-
-
-    return test;
+    return orderedUserData.slice(startId, endId);
   }, [orderedUserData, rowsPerPage, currentPage])
 
   const nextPaginate = useCallback(() => {
