@@ -46,7 +46,7 @@ export default function ContactInformation() {
               </div>
               <div className="flex flex-col justify-center ml-2">
                 <span className="text-sky-500 text-2xl font-semibold">First</span>
-                <span>Personal Information</span>
+                <span className='text-zinc-600'>Personal Information</span>
               </div>
               <div className="relative ml-2 w-[87px]">
                 <div className="w-[87px] h-1 bg-zinc-300 left-0 top-1/2 -translate-y-1/2 absolute" />
@@ -60,7 +60,7 @@ export default function ContactInformation() {
               </div>
               <div className="flex flex-col justify-center ml-2">
                 <span className=" text-2xl font-semibold">Second</span>
-                <span>Contact Information</span>
+                <span className='text-zinc-600'>Contact Information</span>
               </div>
               <div className="relative ml-2 w-[87px]">
                 <div className="w-[87px] h-1 bg-zinc-300 left-0 top-1/2 -translate-y-1/2 absolute" />
@@ -74,19 +74,19 @@ export default function ContactInformation() {
               </div>
               <div className="flex flex-col justify-center ml-2">
                 <span className=" text-2xl font-semibold">Third</span>
-                <span>Mailing Information</span>
+                <span className='text-zinc-600'>Mailing Information</span>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-8">
           <div className="w-[620px] h-full relative bg-white rounded-[5px] shadow flex items-center flex-col p-16 gap-y-4">
             <div className="flex flex-col">
               <label htmlFor="mobileNumber" className="text-zinc-600 text-sm">
                 Mobile Number
                 <span className="text-red-600 text-[15px] font-normal">*</span>
               </label>
-              <input type="text" id="mobileNumber" className="w-[500px] bg-zinc-100 rounded h-12 px-4 focus:border-none" placeholder="Please enter you phone number" typeof="number" value={contactInformation.mobileNumber}
+              <input type="tel" id="mobileNumber" className="w-[500px] text-zinc-600 bg-zinc-100 rounded h-12 px-4 focus:border-none" placeholder="Please enter you phone number" typeof="number" value={contactInformation.mobileNumber}
                 onChange={e => setContactInformation({
                   ...contactInformation, mobileNumber: e.target
                     .value
@@ -101,7 +101,7 @@ export default function ContactInformation() {
                 Email Address
                 <span className="text-red-600 text-[15px] font-normal">*</span>
               </label>
-              <input type="email" id="mobileNumber" className="w-[500px] bg-zinc-100 rounded h-12 px-4 focus:border-none" placeholder="Please enter you e-mail" typeof="email" value={contactInformation.email}
+              <input type="email" id="mobileNumber" className="w-[500px] bg-zinc-100 rounded text-zinc-600 h-12 px-4 focus:border-none" placeholder="Please enter you e-mail" typeof="email" value={contactInformation.email}
                 onChange={e => setContactInformation({
                   ...contactInformation, email: e.target
                     .value

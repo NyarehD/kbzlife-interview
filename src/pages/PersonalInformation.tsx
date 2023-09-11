@@ -78,7 +78,7 @@ export default function PersonalInformation1() {
             </div>
             <div className="flex flex-col justify-center ml-2">
               <span className="text-sky-500 text-2xl font-semibold">First</span>
-              <span>Personal Information</span>
+              <span className="text-zinc-600">Personal Information</span>
             </div>
             <div className="relative ml-2 w-[87px]">
               <div className="w-[87px] h-1 bg-zinc-300 left-0 top-1/2 -translate-y-1/2 absolute" />
@@ -92,7 +92,7 @@ export default function PersonalInformation1() {
             </div>
             <div className="flex flex-col justify-center ml-2">
               <span className=" text-2xl font-semibold">Second</span>
-              <span>Contact Information</span>
+              <span className="text-zinc-600">Contact Information</span>
             </div>
             <div className="relative ml-2 w-[87px]">
               <div className="w-[87px] h-1 bg-zinc-300 left-0 top-1/2 -translate-y-1/2 absolute" />
@@ -106,12 +106,12 @@ export default function PersonalInformation1() {
             </div>
             <div className="flex flex-col justify-center ml-2">
               <span className=" text-2xl font-semibold">Third</span>
-              <span>Mailing Information</span>
+              <span className="text-zinc-600">Mailing Information</span>
             </div>
           </div>
         </div>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-8">
         <div className="w-[620px] h-full relative bg-white rounded-[5px] shadow flex items-center flex-col p-16 gap-y-4">
           <div className="gap-x-4 flex flex-row justify-start w-full">
             <div className="flex flex-col">
@@ -119,7 +119,7 @@ export default function PersonalInformation1() {
                 Type
                 <span className="text-red-600 text-[15px] font-normal">*</span>
               </label>
-              <select name="title" id="title" className="w-[113px] h-12 bg-zinc-100 rounded px-3" defaultValue={personalInformation.title} onChange={e => setPersonalInformation({ ...personalInformation, title: e.target.value })}>
+              <select name="title" id="title" className="w-[113px] h-12 bg-zinc-100 text-zinc-600 rounded px-3" defaultValue={personalInformation.title} onChange={e => setPersonalInformation({ ...personalInformation, title: e.target.value })}>
                 <option value="Mr">Mr</option>
                 <option value="Mrs">Mrs</option>
                 <option value="Dr">Dr</option>
@@ -136,15 +136,15 @@ export default function PersonalInformation1() {
           <div className="gap-x-4 flex flex-row w-full">
             <div className="">
               <input type="radio" name="nrcType" id="NRC" className="mr-1" value="NRC" onChange={e => setPersonalInformation({ ...personalInformation, type: e.currentTarget.value })} checked={personalInformation.type === "NRC"} />
-              <label htmlFor="NRC">NRC</label>
+              <label htmlFor="NRC" className="text-zinc-600 text-base font-normal">NRC</label>
             </div>
             <div className="">
               <input type="radio" name="nrcType" id="oldNRC" className="mr-1" value="Old NRC" onChange={e => setPersonalInformation({ ...personalInformation, type: e.currentTarget.value })} checked={personalInformation.type === "Old NRC"} />
-              <label htmlFor="oldNRC">Old NRC</label>
+              <label htmlFor="oldNRC" className="text-zinc-600 text-base font-normal">Old NRC</label>
             </div>
             <div className="">
               <input type="radio" name="nrcType" id="passport" className="mr-1" value="Passport" onChange={e => setPersonalInformation({ ...personalInformation, type: e.currentTarget.value })} checked={personalInformation.type === "Passport"} />
-              <label htmlFor="passport">Passport</label>
+              <label htmlFor="passport" className="text-zinc-600 text-base font-normal">Passport</label>
             </div>
           </div>
           <div className="gap-x-3 flex flex-row w-full">
@@ -153,7 +153,7 @@ export default function PersonalInformation1() {
                 State
                 <span className="text-red-600 text-[15px] font-normal">*</span>
               </label>
-              <select name="state" id="state" className="bg-zinc-100 w-full h-12 px-3 rounded" value={personalInformation?.state}
+              <select name="state" id="state" className="bg-zinc-100 text-zinc-600 w-full h-12 px-3 rounded" value={personalInformation?.state}
                 onChange={(e) => setPersonalInformation({ ...personalInformation, state: e.target.value })
                 }>
                 {
@@ -168,7 +168,7 @@ export default function PersonalInformation1() {
                 Township
                 <span className="text-red-600 text-[15px] font-normal">*</span>
               </label>
-              <select name="township" id="township" className="bg-zinc-100 w-full h-12 px-3 rounded" value={personalInformation?.township}
+              <select name="township" id="township" className="bg-zinc-100 text-zinc-600 w-full h-12 px-3 rounded" value={personalInformation?.township}
                 onChange={(e) => setPersonalInformation({ ...personalInformation, township: e.target.value })
                 }>
                 {
@@ -178,7 +178,7 @@ export default function PersonalInformation1() {
                 }
               </select>
             </div>
-            <div className="flex flex-col w-full self-end h-[48px] bg-zinc-100 rounded px-3 py-3">
+            <div className="flex flex-col w-full self-end h-[48px] bg-zinc-100 text-zinc-600 rounded px-3 py-3">
               <span className="">{nrcTypeNumber}</span>
             </div>
           </div>
@@ -187,14 +187,14 @@ export default function PersonalInformation1() {
               Number
               <span className="text-red-600 text-[15px] font-normal">*</span>
             </label>
-            <input type="text" id="nrcNumber" className="bg-zinc-100 focus:border-none w-full h-12 px-4 rounded" value={personalInformation.nrcNumber} onChange={e => setPersonalInformation({ ...personalInformation, nrcNumber: e.target.value })} />
+            <input type="text" id="nrcNumber" className="bg-zinc-100 text-zinc-600 focus:border-none w-full h-12 px-4 rounded" value={personalInformation.nrcNumber} onChange={e => setPersonalInformation({ ...personalInformation, nrcNumber: e.target.value })} />
           </div>
           <div className="flex flex-col w-full">
             <label htmlFor="nrcNumber" className="text-zinc-600 text-sm">
               Date of Birth
               <span className="text-red-600 text-[15px] font-normal">*</span>
             </label>
-            <input type="text" id="nrcNumber" className="bg-zinc-100 focus:border-none w-full h-12 px-4 rounded" value={personalInformation.dateOfBirth} onChange={e => setPersonalInformation({ ...personalInformation, dateOfBirth: e.target.value })} placeholder="MM/DD/YYYY" />
+            <input type="text" id="nrcNumber" className="bg-zinc-100 text-zinc-600 focus:border-none w-full h-12 px-4 rounded" value={personalInformation.dateOfBirth} onChange={e => setPersonalInformation({ ...personalInformation, dateOfBirth: e.target.value })} placeholder="MM/DD/YYYY" />
             {
               personalInformation.dateOfBirth && !isMature &&
               <span className="w-full font-bold text-red-500">Must be 18 years or older</span>

@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import './App.css';
 import AddIcon from "./assets/add.svg";
 import SortingIconTop from "./assets/column-sorting (1).svg";
@@ -6,7 +7,6 @@ import SortingIcon from "./assets/column-sorting.svg";
 import LeftIcon from "./assets/left.svg";
 import SearchIcon from "./assets/search.svg";
 import User from './types/user.type';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 
 function App() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function App() {
     return parsedData;
   }, [])
 
-  // Search the local storage
+  // Search userData
   const searchedUserData: User[] = useMemo(() => {
     return userData.filter((item) => {
       return item.address.includes(searchKeyword) || item.fullName.includes(searchKeyword) || item.email.includes(searchKeyword) || item.mobileNumber.includes(searchKeyword) || item.nrc.includes(searchKeyword)
@@ -41,7 +41,7 @@ function App() {
     setNameSortStatus(setNumber);
   }, [nameSortStatus])
 
-  // Sorted User Data
+  // Sort User Data
   const orderedUserData: User[] = useMemo(() => {
     let sortedData: User[] = searchedUserData;
 
@@ -80,10 +80,12 @@ function App() {
   const [searchParam] = useSearchParams();
   const currentPage = Number(searchParam.get("page") || 1);
 
-
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const totalPages = useMemo(() => Math.floor(orderedUserData.length / rowsPerPage), [rowsPerPage, orderedUserData])
+  const totalPages = useMemo(() => {
+    let roundedTotalPages = Math.floor(orderedUserData.length / rowsPerPage)
+    return roundedTotalPages > 1 ? roundedTotalPages : 1;
+  }, [rowsPerPage, orderedUserData])
 
   const paginatedSortedUserData: User[] = useMemo(() => {
     const startId = currentPage !== 1 ? rowsPerPage * currentPage : 0;
@@ -164,14 +166,14 @@ function App() {
             </tbody>
           </table>
         </div>
-        <div className=" flex flex-row justify-between px-5 py-3">
+        <div className=" flex flex-row justify-between px-5 py-4">
           <div>
             <span className=' text-base font-medium leading-5 tracking-tight text-gray-500'>{paginationStatus}</span>
           </div>
           <div className="flex">
             <div className="flex mr-5 text-right text-gray-500 text-base align-bottom font-medium leading-[18px] tracking-tight">
-              <label htmlFor="Rows" className='align-bottom'>Rows per page:</label>
-              <select name="Rows" id="Rows" className='ml-1' value={rowsPerPage} onChange={e => {
+              <label htmlFor="Rows" className='mt-1 align-bottom'>Rows per page:</label>
+              <select name="Rows" id="Rows" className='ml-1 bg-transparent' value={rowsPerPage} onChange={e => {
                 setRowsPerPage(Number(e.target.value))
                 navigate("/")
               }}>
@@ -181,7 +183,7 @@ function App() {
               </select>
             </div>
             <div className="flex">
-              <button className='border-slate-300 border rounded' onClick={prevPaginate}>
+              <button className={`border-slate-300 border rounded ${currentPage === 1 && 'cursor-not-allowed'}`} onClick={prevPaginate}>
                 <img src={LeftIcon} alt="left icon" className='w-6 h-5' />
               </button>
               <span className='mx-1'>{currentPage}/{totalPages}</span>
