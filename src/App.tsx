@@ -108,7 +108,7 @@ function App() {
 
   return (
     <div className="relative w-full h-full max-w-full py-12 mx-auto">
-      <div className="bg-slate-100 border-slate-300/50 mx-24 border rounded">
+      <div className="bg-slate-50 border-slate-300/50 mx-24 border rounded-md">
         <div className="flex justify-between px-3 py-4">
           <div className="relative">
             <input type="text" className='w-80 h-8 px-3 py-1.5 bg-white border border-slate-300/50 rounded-md shadow justify-start items-center gap-2 inline-flex pl-10' placeholder='Search...' value={searchKeyword} onChange={e => setSearchKeyword(e.target.value)} />
@@ -121,7 +121,7 @@ function App() {
         </div>
         <div className="">
           <table className='table table-auto'>
-            <thead className=''>
+            <thead className='border-b'>
               <tr className='px-3 py-4'>
                 <th className='text-start block w-6 px-3 py-4 text-xs font-semibold leading-none tracking-wide text-gray-600 uppercase'>
                   <input type="checkbox" name="" id="" className='relative w-4 h-4 bg-white rounded shadow' />
@@ -144,10 +144,10 @@ function App() {
                 <th className='text-start w-2/12 px-3 py-4 text-xs font-semibold leading-none tracking-wide text-gray-600 uppercase'>MOBILE NUMBER</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className='bg-white'>
               {
                 paginatedSortedUserData.map((user, i) => (
-                  <tr key={`id${user.id}index${i}`} className='hover:bg-slate-200 transition-colors duration-300'>
+                  <tr key={`id${user.id}index${i}`} className='hover:bg-slate-200/40 transition-colors duration-300'>
                     <td className='relative items-center px-3 mr-5 text-xs font-semibold leading-none tracking-wide text-center text-gray-600 uppercase align-middle'>
                       <input type="checkbox" name="" id="" className='top-1/2 absolute w-4 h-4 -translate-y-1/2 bg-white rounded shadow' />
                     </td>
@@ -166,7 +166,7 @@ function App() {
             </tbody>
           </table>
         </div>
-        <div className=" flex flex-row justify-between px-5 py-4">
+        <div className=" flex flex-row justify-between px-5 py-4 border-t">
           <div>
             <span className=' text-base font-medium leading-5 tracking-tight text-gray-500'>{paginationStatus}</span>
           </div>
@@ -186,7 +186,11 @@ function App() {
               <button className={`border-slate-300 border rounded ${currentPage === 1 && 'cursor-not-allowed'}`} onClick={prevPaginate}>
                 <img src={LeftIcon} alt="left icon" className='w-6 h-5' />
               </button>
-              <span className='mx-1'>{currentPage}/{totalPages}</span>
+              <p className='mx-2'>
+                <span className=''>{currentPage}</span>
+
+                <span className='text-gray-600'>/{totalPages}</span>
+              </p>
               <button className='border-slate-300 border rounded' onClick={nextPaginate}>
                 <img src={LeftIcon} alt="right icon" className='w-6 h-5 rotate-180' />
               </button>

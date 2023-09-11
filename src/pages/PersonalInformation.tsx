@@ -112,7 +112,7 @@ export default function PersonalInformation1() {
         </div>
       </div>
       <div className="flex justify-center mt-8">
-        <div className="w-[620px] h-full relative bg-white rounded-[5px] shadow flex items-center flex-col p-16 gap-y-4">
+        <div className="w-[620px] h-full relative bg-white border-slate-300/50 shadow border rounded-md flex items-center flex-col p-16 gap-y-4">
           <div className="gap-x-4 flex flex-row justify-start w-full">
             <div className="flex flex-col">
               <label htmlFor="title" className="text-zinc-600 text-sm">

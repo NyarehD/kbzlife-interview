@@ -93,14 +93,14 @@ export default function MailingInformation() {
                 </span>
               </div>
               <div className="flex flex-col justify-center ml-2">
-                <span className=" text-2xl font-semibold">Third</span>
+                <span className=" text-sky-500 text-2xl font-semibold">Third</span>
                 <span className='text-zinc-600'>Mailing Information</span>
               </div>
             </div>
           </div>
         </div>
         <div className="flex justify-center mt-8">
-          <div className="w-[620px] h-full relative bg-white rounded-[5px] shadow flex items-center flex-col p-16 gap-y-4">
+          <div className="w-[620px] border-slate-300/50 border rounded-md h-full relative bg-white shadow flex items-center flex-col p-16 gap-y-4">
             <div className="flex flex-col w-full">
               <label htmlFor="state" className="text-zinc-600 text-sm">
                 State/District
@@ -136,7 +136,7 @@ export default function MailingInformation() {
                 Address
                 <span className="text-red-600 text-[15px] font-normal">*</span>
               </label>
-              <textarea className="bg-zinc-100 w-full p-3 rounded" rows={6} onChange={e => setMailingInfo({ ...mailingInfo, address: e.target.value })} value={mailingInfo.address} maxLength={350}>
+              <textarea className="bg-zinc-100 w-full p-3 rounded resize-none" rows={6} onChange={e => setMailingInfo({ ...mailingInfo, address: e.target.value })} value={mailingInfo.address} maxLength={350}>
               </textarea>
               <span className="text-neutral-400 text-xs font-normal">Your character limit is 350.</span>
             </div>

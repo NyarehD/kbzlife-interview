@@ -59,7 +59,7 @@ export default function ContactInformation() {
                 </span>
               </div>
               <div className="flex flex-col justify-center ml-2">
-                <span className=" text-2xl font-semibold">Second</span>
+                <span className=" text-sky-500 text-2xl font-semibold">Second</span>
                 <span className='text-zinc-600'>Contact Information</span>
               </div>
               <div className="relative ml-2 w-[87px]">
@@ -80,7 +80,7 @@ export default function ContactInformation() {
           </div>
         </div>
         <div className="flex justify-center mt-8">
-          <div className="w-[620px] h-full relative bg-white rounded-[5px] shadow flex items-center flex-col p-16 gap-y-4">
+          <div className="w-[620px] border-slate-300/50 border rounded-md h-full relative bg-white shadow flex items-center flex-col p-16 gap-y-4">
             <div className="flex flex-col">
               <label htmlFor="mobileNumber" className="text-zinc-600 text-sm">
                 Mobile Number
