@@ -96,6 +96,13 @@ function App() {
   const prevPaginate = useCallback(() => {
     return navigate(`/?page=${currentPage > 1 ? currentPage - 1 : 1}`)
   }, [currentPage])
+
+  const paginationStatus = useMemo(() => {
+    const startId = currentPage !== 1 ? rowsPerPage * currentPage : 0;
+    const endId = startId + rowsPerPage;
+    return `${startId}-${endId} of ${orderedUserData.length}`
+  }, [currentPage, rowsPerPage, orderedUserData])
+
   return (
     <div className="relative w-full h-full max-w-full py-12 mx-auto">
       <div className="bg-slate-100 border-slate-300/50 mx-24 border rounded">
@@ -158,7 +165,7 @@ function App() {
         </div>
         <div className=" flex flex-row justify-between px-5 py-3">
           <div>
-            <span>cont</span>
+            <span className=' text-base font-medium leading-5 tracking-tight text-gray-500'>{paginationStatus}</span>
           </div>
           <div className="flex">
             <div className="flex mr-5 text-right text-gray-500 text-base align-bottom font-medium leading-[18px] tracking-tight">
