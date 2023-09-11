@@ -32,7 +32,7 @@ export default function ContactInformation() {
     return re.test(contactInformation.email);
   }, [contactInformation.email])
   const isMobileNumberValid = useMemo(() => {
-    const re = /09[0-9]{9}/;
+    const re = /^09\d{9}$/;
     return re.test(contactInformation.mobileNumber);
   }, [contactInformation.mobileNumber])
   return (
