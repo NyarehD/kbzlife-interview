@@ -84,11 +84,12 @@ function App() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const totalPages = useMemo(() => Math.floor(orderedUserData.length / rowsPerPage), [rowsPerPage, orderedUserData])
+
   const paginatedSortedUserData: User[] = useMemo(() => {
     const startId = currentPage !== 1 ? rowsPerPage * currentPage : 0;
     const endId = startId + rowsPerPage;
     return orderedUserData.slice(startId, endId);
-  }, [orderedUserData, rowsPerPage, currentPage])
+  }, [orderedUserData, rowsPerPage, currentPage, nameSortStatus, idSortStatus])
 
   const nextPaginate = useCallback(() => {
     return navigate(`/?page=${currentPage !== totalPages ? currentPage + 1 : currentPage}`)
