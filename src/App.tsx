@@ -88,7 +88,7 @@ function App() {
   }, [rowsPerPage, orderedUserData])
 
   const paginatedSortedUserData: User[] = useMemo(() => {
-    const startId = currentPage !== 1 ? rowsPerPage * currentPage : 0;
+    const startId = currentPage !== 1 ? rowsPerPage * (currentPage - 1) : 0;
     const endId = startId + rowsPerPage;
     return orderedUserData.slice(startId, endId);
   }, [orderedUserData, rowsPerPage, currentPage, nameSortStatus, idSortStatus])
@@ -101,10 +101,16 @@ function App() {
   }, [currentPage])
 
   const paginationStatus = useMemo(() => {
-    const startId = currentPage !== 1 ? rowsPerPage * currentPage : 0;
-    const endId = startId + rowsPerPage;
-    return `${startId}-${endId} of ${orderedUserData.length}`
-  }, [currentPage, rowsPerPage, orderedUserData])
+    let startId: number, endId: number;
+    if (currentPage !== 1) {
+      startId = rowsPerPage * (currentPage - 1) + 1;
+      endId = (rowsPerPage * (currentPage - 1)) + paginatedSortedUserData.length;
+    } else {
+      startId = 1;
+      endId = rowsPerPage;
+    }
+    return `${startId === 0 ? 1 : startId}-${endId} of ${orderedUserData.length}`
+  }, [currentPage, rowsPerPage, paginatedSortedUserData])
 
   return (
     <div className="relative w-full h-full max-w-full py-12 mx-auto">
@@ -188,7 +194,6 @@ function App() {
               </button>
               <p className='mx-2'>
                 <span className=''>{currentPage}</span>
-
                 <span className='text-gray-600'>/{totalPages}</span>
               </p>
               <button className='border-slate-300 border rounded' onClick={nextPaginate}>
