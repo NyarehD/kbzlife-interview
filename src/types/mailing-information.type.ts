@@ -1,5 +1,5 @@
 export default interface MailingInformation {
-  state: string
-  township: string
-  address: string
+  mail_state: string
+  mail_township: string
+  mail_address: string
 }

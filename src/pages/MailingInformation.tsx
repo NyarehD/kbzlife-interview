@@ -12,9 +12,9 @@ export default function MailingInformation() {
   const { personalInformation, contactInformation }: { personalInformation: PersonalInformation, contactInformation: ContactInformation } = location.state;
 
   const [mailingInfo, setMailingInfo] = useState<MailingInformation>({
-    address: "",
-    state: "",
-    township: ""
+    mail_address: "",
+    mail_state: "",
+    mail_township: ""
   });
 
   const states = useMemo(() => {
@@ -106,8 +106,8 @@ export default function MailingInformation() {
                 State/District
                 <span className="text-red-600 text-[15px] font-normal">*</span>
               </label>
-              <select name="state" id="state" className="bg-zinc-100 w-full h-12 px-3 rounded" value={mailingInfo.state}
-                onChange={(e) => setMailingInfo({ ...mailingInfo, state: e.target.value })
+              <select name="state" id="state" className="bg-zinc-100 w-full h-12 px-3 rounded" value={mailingInfo.mail_state}
+                onChange={(e) => setMailingInfo({ ...mailingInfo, mail_state: e.target.value })
                 }>
                 {
                   states.map(item => (
@@ -121,8 +121,8 @@ export default function MailingInformation() {
                 Township
                 <span className="text-red-600 text-[15px] font-normal">*</span>
               </label>
-              <select name="township" id="township" className="bg-zinc-100 w-full h-12 px-3 rounded" value={mailingInfo.township}
-                onChange={(e) => setMailingInfo({ ...mailingInfo, township: e.target.value })
+              <select name="township" id="township" className="bg-zinc-100 w-full h-12 px-3 rounded" value={mailingInfo.mail_township}
+                onChange={(e) => setMailingInfo({ ...mailingInfo, mail_township: e.target.value })
                 }>
                 {
                   townships?.map(item => (
@@ -136,7 +136,7 @@ export default function MailingInformation() {
                 Address
                 <span className="text-red-600 text-[15px] font-normal">*</span>
               </label>
-              <textarea className="bg-zinc-100 w-full p-3 rounded resize-none" rows={6} onChange={e => setMailingInfo({ ...mailingInfo, address: e.target.value })} value={mailingInfo.address} maxLength={350}>
+              <textarea className="bg-zinc-100 w-full p-3 rounded resize-none" rows={6} onChange={e => setMailingInfo({ ...mailingInfo, mail_address: e.target.value })} value={mailingInfo.mail_address} maxLength={350}>
               </textarea>
               <span className="text-neutral-400 text-xs font-normal">Your character limit is 350.</span>
             </div>

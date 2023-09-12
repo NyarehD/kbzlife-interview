@@ -23,7 +23,7 @@ function App() {
   // Search userData
   const searchedUserData: User[] = useMemo(() => {
     return userData.filter((item) => {
-      return item.address.includes(searchKeyword) || item.fullName.includes(searchKeyword) || item.email.includes(searchKeyword) || item.mobileNumber.includes(searchKeyword) || item.nrc.includes(searchKeyword)
+      return item.mail_address.includes(searchKeyword) || item.fullName.includes(searchKeyword) || item.email.includes(searchKeyword) || item.mobileNumber.includes(searchKeyword) || item.nrc.includes(searchKeyword)
     })
   }, [searchKeyword])
 
@@ -156,7 +156,7 @@ function App() {
                       <span className='block'>{user.fullName}</span>
                       <span className='block text-gray-500 text-sm font-normal leading-[18px] tracking-tight'>5684236532</span>
                     </td>
-                    <td className='px-3 py-4 text-sm font-normal leading-tight text-gray-600'>{user.address}</td>
+                    <td className='px-3 py-4 text-sm font-normal leading-tight text-gray-600'>{user.mail_address}</td>
                     <td className='px-3 py-4 text-sm font-normal leading-tight text-black'>{user.nrc}</td>
                     <td className='px-3 py-4 text-sm font-normal leading-tight text-black'>{user.email}</td>
                     <td className='px-3 py-4'>{user.mobileNumber}</td>
