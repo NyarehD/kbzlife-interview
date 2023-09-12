@@ -83,7 +83,7 @@ function App() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const totalPages = useMemo(() => {
-    let roundedTotalPages = Math.floor(orderedUserData.length / rowsPerPage)
+    let roundedTotalPages = Math.ceil(orderedUserData.length / rowsPerPage)
     return roundedTotalPages > 1 ? roundedTotalPages : 1;
   }, [rowsPerPage, orderedUserData])
 
