@@ -10,6 +10,7 @@ import User from "../types/user.type";
 export default function MailingInformation() {
   const location = useLocation();
   const { personalInformation, contactInformation }: { personalInformation: PersonalInformation, contactInformation: ContactInformation } = location.state;
+  const [showRequired, setShowRequired] = useState(false)
 
   const [mailingInfo, setMailingInfo] = useState<MailingInformation>({
     mail_address: "",
@@ -24,7 +25,7 @@ export default function MailingInformation() {
   const townships = useMemo(() => {
     // Search for the state
     const filteredGeoData: GeoData[] = geoData.filter((item) => {
-      return item.eng === mailingInfo.state;
+      return item.eng === mailingInfo.mail_state;
     });
     // Filter the state into districts and into townships
     // After those, flatten the array into single array
@@ -32,30 +33,35 @@ export default function MailingInformation() {
       return district.townships;
     }).flat();
     return filteredTownships;
-  }, [mailingInfo.state])
+  }, [mailingInfo.mail_state])
 
 
   const navigate = useNavigate();
   function saveToLocalStorage() {
-    const existingUsers = localStorage.getItem("users");
+    if (mailingInfo.mail_address && mailingInfo.mail_state && mailingInfo.mail_township) {
+      setShowRequired(false)
+      const existingUsers = localStorage.getItem("users");
 
-    let addingItems: User[];
-    const { nrcNumber, nrcTypeNumber, ...otherPersonalInformation } = personalInformation;
-    if (existingUsers) {
-      // Add existing Items into new items
-      const parsedUsers: User[] = JSON.parse(existingUsers);
+      let addingItems: User[];
+      const { nrcNumber, nrcTypeNumber, ...otherPersonalInformation } = personalInformation;
+      if (existingUsers) {
+        // Add existing Items into new items
+        const parsedUsers: User[] = JSON.parse(existingUsers);
 
-      addingItems = [
-        ...parsedUsers,
-        {
-          ...otherPersonalInformation, ...contactInformation, ...mailingInfo, id: parsedUsers.length, nrc: nrcTypeNumber + "(C)" + nrcNumber
-        }]
+        addingItems = [
+          ...parsedUsers,
+          {
+            ...otherPersonalInformation, ...contactInformation, ...mailingInfo, id: parsedUsers.length, nrc: nrcTypeNumber + "(C)" + nrcNumber
+          }]
+      } else {
+        addingItems = [{ ...personalInformation, ...contactInformation, ...mailingInfo, id: 0, nrc: nrcTypeNumber + "(C)" + nrcNumber }]
+      }
+
+      localStorage.setItem("users", JSON.stringify(addingItems));
+      navigate("/");
     } else {
-      addingItems = [{ ...personalInformation, ...contactInformation, ...mailingInfo, id: 0, nrc: nrcTypeNumber + "(C)" + nrcNumber }]
+      setShowRequired(true)
     }
-
-    localStorage.setItem("users", JSON.stringify(addingItems));
-    navigate("/");
   }
   return (
     <div>
@@ -142,6 +148,7 @@ export default function MailingInformation() {
             </div>
             <div className="w-full">
               <button className="w-full bg-sky-500 rounded-[36px] h-12 text-white font-bold" onClick={saveToLocalStorage}>Finished</button>
+              {showRequired && <span className="w-full font-bold text-red-500">Please fill required fields</span>}
             </div>
           </div>
         </div>

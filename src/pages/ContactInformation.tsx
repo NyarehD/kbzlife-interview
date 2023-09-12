@@ -7,6 +7,7 @@ import PersonalInformation from '../types/personal-information.type';
 export default function ContactInformation() {
   const location = useLocation();
   const { personalInformation }: { personalInformation: PersonalInformation } = location.state;
+  const [showRequired, setShowRequired] = useState(false)
 
   const [contactInformation, setContactInformation] = useState<ContactInformation>({
     email: "",
@@ -16,13 +17,18 @@ export default function ContactInformation() {
   // Routing
   const navigate = useNavigate()
   function nextPage() {
-    if (isEmailValid && isMobileNumberValid) {
-      navigate("/mailing-information", {
-        state: {
-          personalInformation,
-          contactInformation
-        }
-      })
+    if (contactInformation.email && contactInformation.mobileNumber) {
+      setShowRequired(false);
+      if (isEmailValid && isMobileNumberValid) {
+        navigate("/mailing-information", {
+          state: {
+            personalInformation,
+            contactInformation
+          }
+        })
+      }
+    } else {
+      setShowRequired(true);
     }
   }
 
@@ -113,6 +119,7 @@ export default function ContactInformation() {
             </div>
             <div className="w-full">
               <button className="w-full bg-sky-500 rounded-[36px] h-12 text-white font-bold" onClick={nextPage}>Next Step</button>
+              {showRequired && <span className="w-full font-bold text-red-500">Please fill required fields</span>}
             </div>
           </div>
         </div>

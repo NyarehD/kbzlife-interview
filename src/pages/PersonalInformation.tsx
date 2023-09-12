@@ -5,6 +5,7 @@ import { data as nrcData } from "../assets/data/nrc.json" assert { type: "json" 
 import { GeoData } from "../types/geo.type";
 import PersonalInformation from "../types/personal-information.type";
 export default function PersonalInformation1() {
+  const [showRequired, setShowRequired] = useState(false)
   const [personalInformation, setPersonalInformation] = useState<PersonalInformation>({
     type: "NRC",
     fullName: "",
@@ -60,12 +61,17 @@ export default function PersonalInformation1() {
   // Routing
   const navigate = useNavigate()
   function nextPage() {
-    if (isMature) {
-      navigate("/contact-information", {
-        state: {
-          personalInformation
-        }
-      })
+    if (personalInformation.fullName && personalInformation.nrcNumber && personalInformation.nrcTypeNumber && personalInformation.dateOfBirth) {
+      setShowRequired(false);
+      if (isMature) {
+        navigate("/contact-information", {
+          state: {
+            personalInformation
+          }
+        })
+      }
+    } else {
+      setShowRequired(true)
     }
   }
   return (
@@ -203,6 +209,7 @@ export default function PersonalInformation1() {
           <div className="w-full">
             <button className="w-full bg-sky-500 rounded-[36px] h-12 text-white font-bold"
               onClick={nextPage}>Next Step</button>
+            {showRequired && <span className="w-full font-bold text-red-500">Please fill required fields</span>}
           </div>
         </div>
       </div>
